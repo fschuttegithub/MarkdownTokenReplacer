@@ -13,7 +13,7 @@ export function getPreview(values, isDarkMode) {
                     {
                         type: "Text",
                         fontColor: isDarkMode ? "#579BF9" : "#2D2FB8",
-                        content: "Markdown with Citations",
+                        content: "Markdown Token Replacer"
                     }
                 ]
             },
@@ -32,21 +32,20 @@ export function getPreview(values, isDarkMode) {
         ]
     };
 
-    const sourceContent = {
+    const tokenContent = {
         type: "Container",
         borders: true,
         children: [
             {
                 type: "DropZone",
-                property: values.sourceContent,
+                property: values.tokenContent,
                 placeholder: "Source content"
             }
         ]
     };
 
-
     return {
         type: "Container",
-        children: [titleHeader, sourceContent]
+        children: [titleHeader, tokenContent]
     };
 }

@@ -1,6 +1,6 @@
 import { Component, createElement } from "react";
-import MarkdownView from "react-showdown";
 import DOMPurify from "dompurify";
+import MarkdownView from "react-showdown";
 
 export class MarkDownText extends Component {
     sanitizeHtml = html => (this.props.sanitize ? DOMPurify.sanitize(html) : html);
@@ -15,4 +15,3 @@ export class MarkDownText extends Component {
         );
     }
 }
-

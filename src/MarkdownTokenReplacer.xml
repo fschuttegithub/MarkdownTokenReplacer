@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget
-    id="kobeon.markdownwithcitations.MarkDownWithCitations"
+    id="kobeon.markdowntokenreplacer.MarkdownTokenReplacer"
     pluginWidget="true"
     needsEntityContext="true"
     offlineCapable="true"
@@ -8,8 +8,8 @@
     xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
-    <name>Markdown With Citations</name>
-    <description>Render Markdown and replace matches with inline source content.</description>
+    <name>Markdown Token Replacer</name>
+    <description>Replace matched Markdown tokens with inline Mendix content.</description>
     <icon />
 
     <properties>
@@ -26,19 +26,19 @@
                 <description>Sanitize rendered HTML with DOMPurify.</description>
             </property>
         </propertyGroup>
-        <propertyGroup caption="Citations">
-            <property key="sources" type="datasource" isList="true">
-                <caption>Sources</caption>
-                <description>List of Source objects associated with this document.</description>
+        <propertyGroup caption="Tokens">
+            <property key="tokens" type="datasource" isList="true">
+                <caption>Token Items</caption>
+                <description>List data source that provides the items matched in the Markdown.</description>
             </property>
-            <property key="sourceIndexAttribute" type="expression" dataSource="sources" required="true">
-                <caption>Source Index</caption>
-                <description>Literal string or /regex/flags to match in the Markdown; evaluated per Source item.</description>
+            <property key="tokenPattern" type="expression" dataSource="tokens" required="true">
+                <caption>Token Pattern</caption>
+                <description>Literal text or /regex/flags expression evaluated per item to find matches in the Markdown.</description>
                 <returnType type="String" />
             </property>
-            <property key="sourceContent" type="widgets" dataSource="sources">
-                <caption>Source Content</caption>
-                <description>Widgets rendered at each match for the corresponding Source item.</description>
+            <property key="tokenContent" type="widgets" dataSource="tokens">
+                <caption>Token Content</caption>
+                <description>Widgets rendered in place of each matched token.</description>
             </property>
         </propertyGroup>
     </properties>

@@ -1,46 +1,37 @@
-## MarkDownWithCitations
-# MarkDown With Citations
+# Markdown Token Replacer
 
-## Purpose
+## Overview
+Markdown Token Replacer turns plain Markdown into richer pages by swapping marked pieces of text with Mendix widgets. Use it for articles, manuals, or knowledge bases where readers should be able to open a source, definition, or action without leaving the paragraph they're reading.
 
-This widget is designed to display text that comes in as Markdown while handling references in a clear and interactive way.  
-Instead of leaving citation markers like `[1]`, `[2]` inline in the text, the widget collects these references and presents them as separate, clickable buttons.
+## Configuration
+1. Drop the widget on a page that already exposes your Markdown text.
+2. Point **Markdown Input** at the attribute that holds that Markdown.
+3. Choose the list of related items under **Tokens**.
+4. Enter the literal text or `/regex/flags` pattern that should be replaced.
+5. Drag the widget(s) you want to show for each match into **Token Content**.
 
-## End Functionality
+### Matching strategy
+- Literal text is matched exactly as you type it.
+- Regular expressions can pull values from your objects (for example `/\[(?<idx>\d+)\]/g`), and the widget always adds the `g` flag.
+- If two matches overlap, the widget keeps the first one so the Markdown still reads correctly.
 
-- Render Markdown text as normal, so users can read content with proper formatting.
-- Detect citation markers (e.g., `[1]`, `[2]`) inside the text.
-- Display a dedicated **Sources section** with buttons for each citation.
-- Each button corresponds to the right source and allows the user to interact with it:
-  - Open a link,
-  - View more details about the source,
-  - Or trigger further actions in the app.
-- Keep the reading experience clean by separating the main text from the source details.
-- Ensure users always have quick access to supporting information without breaking their reading flow.
+## Runtime behaviour
+- Matches refresh automatically when the Markdown changes, when you tweak the settings, or when Mendix finishes loading the list—even if Mendix reuses the same list under the hood.
+- Replacement widgets render through React portals, so they keep their styling and stay interactive.
+- DOMPurify sanitises the HTML output by default to block untrusted markup. Disable only when you fully trust the input.
 
-## Goal
+## Styling
+Style the `.markdown-token-replacer` container or the `.token-host` spans to match your app. The widgets you drop in keep their own classes, so normal styling rules apply.
 
-The end result is a widget that makes documents with references easier to read and navigate by combining standard Markdown rendering with an accessible, interactive way of working with sources.
+## Development
+1. Install dependencies with `npm install` (or `npm install --legacy-peer-deps` for npm 7).
+2. Run `npm start` to rebuild the widget and copy it into your Mendix test project while you work.
+3. Use `npm run build` for a production bundle and `npm run lint` to check code quality before release.
 
+## Use cases
+- Show detailed citations inline without cluttering article text.
+- Make a single word or short phrase launch a microflow or page.
+- Swap jargon for glossary tooltips or info cards.
 
-## Features
-[feature highlights]
-
-## Usage
-[step by step instructions]
-
-## Demo project
-[link to sandbox]
-
-## Issues, suggestions and feature requests
-[link to GitHub issues]
-
-## Development and contribution
-
-1. Install NPM package dependencies by using: `npm install`. If you use NPM v7.x.x, which can be checked by executing `npm -v`, execute: `npm install --legacy-peer-deps`.
-1. Run `npm start` to watch for code changes. On every change:
-    - the widget will be bundled;
-    - the bundle will be included in a `dist` folder in the root directory of the project;
-    - the bundle will be included in the `deployment` and `widgets` folder of the Mendix test project.
-
-[specify contribution]
+## Support & feedback
+Log issues or ideas in your project tracker or contact the Mendix App Store support channel linked to this widget.
