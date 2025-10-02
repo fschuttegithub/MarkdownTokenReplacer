@@ -8,7 +8,7 @@ export class MarkDownText extends Component {
     render() {
         return (
             <MarkdownView
-                markdown={this.props.markdown ?? this.props.markdownInput?.value ?? ""}
+                markdown={this.props.markdown}
                 sanitizeHtml={this.sanitizeHtml}
                 options={{ tables: true, emoji: true, underline: true }}
             />
