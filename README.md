@@ -1,4 +1,4 @@
-﻿# Markdown Token Replacer
+# Markdown Token Replacer
 
 Markdown Token Replacer lets you enrich plain Markdown with components set in Studio Pro. Swap specific words, phrases, or patterns for interactive content so readers get context, actions, or definitions without leaving the paragraph.
 
@@ -17,11 +17,11 @@ Markdown Token Replacer lets you enrich plain Markdown with components set in St
 - Keep output safe with DOMPurify sanitization, enabled by default.
 
 ## Usage
-- Drop the widget on a page that already exposes the Markdown attribute.
-- Bind the Markdown input
-- Provide a list with tokens to be replaced
-- Configure the tokens literal or regex pattern and the widgets to render.
-- Preview the page to confirm matches, spacing, and responsive behaviour.
+1. Drag the widget onto a data view or layout that exposes the Markdown attribute you want to enhance.
+2. In the widget properties, map the Markdown input property to the attribute containing the source text.
+3. Choose a data source (association, XPath, microflow, or nanoflow) for the tokens property that returns the items you want to replace.
+4. For each token, bind the token pattern property to the attribute holding the literal or regex, and the token content property to the widget or snippet you want rendered.
+5. Run or preview the page to confirm replacements, adjust token order for precedence, and tweak styling as needed.
 
 ## Matching
 - Literal patterns match exactly what you type.
@@ -43,8 +43,11 @@ Markdown Token Replacer lets you enrich plain Markdown with components set in St
 - Share feedback, issues, or feature requests through your Mendix App Store support channel.
 - Only disable sanitization when you completely trust the Markdown source.
 
-Example:
-![ExampleUsage](Example.png)
+Example usage (sources are clickable):
+![ExampleUsage](Implementation%20Example.png)
+
+Example config:
+![Replace token [1] in the text](Token%20Example.png)
 
 ## Issues, Suggestions, and Feature Requests
 

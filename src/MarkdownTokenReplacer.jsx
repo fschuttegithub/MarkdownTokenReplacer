@@ -1,5 +1,5 @@
+import * as ReactDOM from "react-dom";
 import { createElement, memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import { MarkDownText } from "./components/MarkDownText.jsx";
 
 const HOST_CLASS = "token-host";
@@ -82,10 +82,14 @@ const MarkdownTokenReplacerComponent = props => {
     const [portals, setPortals] = useState([]);
 
     const tokensStatus = tokens?.status;
-    const items = Array.isArray(tokens?.items) ? tokens.items : [];
+    const tokenItems = tokens?.items;
+    const items = useMemo(() => (Array.isArray(tokenItems) ? tokenItems : []), [tokenItems]);
     const markdownValue = markdownInput?.value ?? "";
 
-    const matchers = useMemo(() => getTokenMatchers(tokensStatus, items, tokenPattern), [tokensStatus, items, tokenPattern]);
+    const matchers = useMemo(
+        () => getTokenMatchers(tokensStatus, items, tokenPattern),
+        [tokensStatus, items, tokenPattern]
+    );
     const markdownWithHosts = useMemo(() => injectInlineHosts(markdownValue, matchers), [markdownValue, matchers]);
 
     const updatePortals = useCallback(() => {
@@ -114,7 +118,7 @@ const MarkdownTokenReplacerComponent = props => {
             try {
                 const content = tokenContent?.get?.(item);
                 if (content) {
-                    nextPortals.push(createPortal(content, host));
+                    nextPortals.push(ReactDOM.createPortal(content, host));
                 } else if (!host.textContent) {
                     host.textContent = "";
                 }
@@ -123,15 +127,13 @@ const MarkdownTokenReplacerComponent = props => {
             }
         }
         setPortals(nextPortals);
-    }, [items, tokenContent, tokensStatus]);
+    }, [items, tokenContent]);
 
     useEffect(() => {
         updatePortals();
     }, [updatePortals, markdownWithHosts]);
 
-    useEffect(() => {
-        return () => setPortals([]);
-    }, []);
+    useEffect(() => () => setPortals([]), []);
 
     return (
         <div className="markdown-token-replacer" ref={containerRef}>
